@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:hsqldb:mem://localhost/fireant
+    username: sa
+    password: 
+    driver-class-name: org.hsqldb.jdbcDriver
+    test-on-borrow: true
+    validation-query: SELECT 1 FROM INFORMATION_SCHEMA.SYSTEM_USERS
+  jpa:
+    show-sql: true
+
+logging:
+  level:
+    root: info
+
+server:
+  port: 8181
+
