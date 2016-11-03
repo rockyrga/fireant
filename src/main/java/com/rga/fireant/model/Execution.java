@@ -26,7 +26,7 @@ public class Execution extends AbstractEntity {
     private static final long serialVersionUID = 1L;
 
     @OneToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "case_id")
+    @JoinColumn(name = "test_case_id")
     @JsonIgnore
     private TestCase testCase;
 
@@ -69,13 +69,5 @@ public class Execution extends AbstractEntity {
 
     public void setOutcome(Outcome outcome) {
         this.outcome = outcome;
-    }
-
-    @Override
-    public String toString() {
-        return "Execution [testCase=" + testCase + ", executedAt=" + executedAt + ", actualResult=" + actualResult + ", outcome="
-                + outcome + ", getId()=" + getId() + ", getVersion()=" + getVersion() + ", getUpdatedAt()=" + getUpdatedAt()
-                + ", getUpdatedBy()=" + getUpdatedBy() + ", isNew()=" + isNew() + ", toString()=" + super.toString()
-                + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
     }
 }

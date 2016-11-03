@@ -1,5 +1,6 @@
 package com.rga.fireant.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,14 +11,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 
 import com.rga.fireant.Application;
 
 @Entity
-@Table(name = "cases")
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = As.WRAPPER_OBJECT, property = "type")
+@Table(name = "test_cases")
 @JsonIgnoreProperties({"new", "hibernateLazyInitializer", "handler"})
 public class TestCase extends AbstractEntity {
 
@@ -38,7 +36,8 @@ public class TestCase extends AbstractEntity {
     @Column(length = Application.TEXT_MAX_LENGTH)
     private String prerequisite;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "testCase", orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE},
+            mappedBy = "testCase")
     private List<Execution> executions;
 
     public String getScenario() {
@@ -82,6 +81,11 @@ public class TestCase extends AbstractEntity {
     }
 
     public List<Execution> getExecutions() {
+
+        if (executions == null) {
+            return new ArrayList<>();
+        }
+
         return executions;
     }
 
@@ -89,13 +93,9 @@ public class TestCase extends AbstractEntity {
         this.executions = executions;
     }
 
-    @Override
-    public String toString() {
-        return "Case [scenario=" + scenario + ", step=" + step + ", expectedResult=" + expectedResult + ", testData=" + testData
-                + ", prerequisite=" + prerequisite + ", executions=" + executions + ", getId()=" + getId() + ", getVersion()="
-                + getVersion() + ", getUpdatedAt()=" + getUpdatedAt() + ", getUpdatedBy()=" + getUpdatedBy() + ", isNew()="
-                + isNew() + ", toString()=" + super.toString() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-                + "]";
-    }
+    public void addExecution(Execution execution) {
 
+        execution.setTestCase(this);
+        getExecutions().add(execution);
+    }
 }

@@ -1,0 +1,45 @@
+{
+	"test_cases": [
+		{
+			"id": 1,
+			"scenario": "Verify that the input field that can accept maximum of 10 characters",
+			"step": "Login to application and key in 10 characters",
+			"expected_result": "Application should be able to accept all 10 characters.",
+			"test_data": null,
+			"prerequisite": null,
+			"updated_at": "2015-12-08 17:50:31",
+			"version": "0"
+		},
+		{
+			"id": 2,
+			"scenario": "Scenario of test case 2",
+			"step": "Step of test case 2",
+			"expected_result": "Expected result of test case 2",
+			"test_data": "Test data of test case 2",
+			"prerequisite": "Prerequisite of test case 2",
+			"updated_at": "2015-12-08 17:50:31",
+			"version": "1"
+		}
+	],
+	
+	"executions": [
+		{
+			"id": 1,
+			"test_case_id": 1,
+			"actual_result": "Application accepts all 10 characters.",
+			"outcome": 1,
+			"executed_at": "2015-12-08 17:50:31",
+			"updated_at": "2015-12-08 17:50:31",
+			"version": "0"
+		},
+		{
+			"id": 2,
+			"test_case_id": 2,
+			"actual_result": "Application accepts all 100 characters.",
+			"outcome": 0,
+			"executed_at": "2015-12-08 17:50:31",
+			"updated_at": "2015-12-08 17:50:31",
+			"version": "0"
+		}
+	]
+}

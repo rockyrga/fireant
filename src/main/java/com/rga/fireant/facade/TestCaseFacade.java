@@ -11,9 +11,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.rga.fireant.model.TestCase;
+import com.rga.fireant.service.CreateTestCase;
+import com.rga.fireant.service.DeleteTestCase;
+import com.rga.fireant.service.GetTestCase;
+import com.rga.fireant.service.ListTestCase;
+import com.rga.fireant.service.UpdateTestCase;
 
 @Component
 @Path("/test-cases")
@@ -21,30 +27,54 @@ import com.rga.fireant.model.TestCase;
 @Produces(MediaType.APPLICATION_JSON)
 public class TestCaseFacade {
 
+    private final GetTestCase getTestCase;
+    private final ListTestCase listTestCase;
+    private final CreateTestCase createTestCase;
+    private final UpdateTestCase updateTestCase;
+    private final DeleteTestCase deleteTestCase;
+
+    @Autowired
+    public TestCaseFacade(GetTestCase getTestCase, ListTestCase listTestCase, CreateTestCase createTestCase,
+            UpdateTestCase updateTestCase, DeleteTestCase deleteTestCase) {
+
+        this.getTestCase = getTestCase;
+        this.listTestCase = listTestCase;
+        this.createTestCase = createTestCase;
+        this.updateTestCase = updateTestCase;
+        this.deleteTestCase = deleteTestCase;
+    }
+
     @GET
     @Path("/{case-id}")
     public Response get(@PathParam("case-id") long caseId) {
-        return null;
+        return Response.ok(getTestCase.get(caseId)).build();
     }
 
     @GET
     public Response list() {
-        return null;
+        return Response.ok(listTestCase.list()).build();
     }
 
     @POST
     public Response save(TestCase testCase) {
-        return null;
+        return Response.ok(createTestCase.create(testCase)).build();
     }
 
     @PUT
-    public Response update(TestCase testCase) {
-        return null;
+    @Path("/{case-id}")
+    public Response update(@PathParam("case-id") long caseId, TestCase testCase) {
+
+        testCase.setId(caseId);
+
+        return Response.ok(updateTestCase.update(testCase)).build();
     }
 
     @DELETE
     @Path("/{case-id}")
     public Response delete(@PathParam("case-id") long caseId) {
-        return null;
+
+        deleteTestCase.delete(caseId);
+
+        return Response.ok().build();
     }
 }

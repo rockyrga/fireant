@@ -13,7 +13,7 @@
       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 
-	<context:property-placeholder location="classpath:configurations/database.properties" />
+	<context:property-placeholder location="classpath:database.properties" />
 
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${database.driverClassName}" />
@@ -29,9 +29,9 @@
 		</property>
 		<property name="packagesToScan">
 			<list>
-				<value>com.rga.gold.model.**</value>
+				<value>com.rga.fireant.model.**</value>
 				<value>org.springframework.data.jpa.convert.threeten</value>
-				<value>com.rga.gold.converter.jpa</value>
+				<value>com.rga.fireant.converter.jpa</value>
 			</list>
 		</property>
 		<property name="jpaProperties">
@@ -56,7 +56,7 @@
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<context:annotation-config />
-	<jpa:repositories base-package="com.rga.gold.model.data.**" />
+	<jpa:repositories base-package="com.rga.fireant.model.data.**" />
 
 	<bean id="databaseTester" class="org.dbunit.DataSourceDatabaseTester">
 		<constructor-arg ref="dataSource" />
