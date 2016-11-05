@@ -26,9 +26,6 @@ public class UpdateExecutionImpl implements UpdateExecution {
     public Execution update(long caseId, Execution execution) {
 
         TestCase testCase = getTestCase.get(caseId);
-        if (testCase.getExecutions().stream().noneMatch(e -> e.getId() == execution.getId())) {
-            // throw exception
-        }
 
         return repository.save(execution);
     }

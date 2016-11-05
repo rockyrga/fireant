@@ -19,9 +19,7 @@ class ListTestCaseSpec extends AbstractSpec {
         this.service = new ListTestCaseImpl(repository)
     }
 
-    @JsonDataSet([
-        "classpath:test-case.json"
-    ])
+    @JsonDataSet(["classpath:test-case.json"])
     def "Should get all test cases"() {
 
         when: "Call list method of ListTestCase"

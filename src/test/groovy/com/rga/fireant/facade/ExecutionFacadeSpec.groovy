@@ -24,9 +24,7 @@ import com.rga.fireant.Application
 @WebIntegrationTest(randomPort = true)
 @ContextConfiguration(loader = SpringApplicationContextLoader.class, classes = Application, locations = ["classpath:test-context-persistence.xml"])
 @Stepwise
-@JsonDataSet([
-    "classpath:test-case.json"
-])
+@JsonDataSet(["classpath:test-case.json"])
 class ExecutionFacadeSpec extends AbstractSpec {
 
     @Value('${local.server.port}')
@@ -51,7 +49,7 @@ class ExecutionFacadeSpec extends AbstractSpec {
 
         then:
         assert response.getStatusCode() == HttpStatus.OK
-        assert response.getBody() == """[{"id":1,"version":0,"updatedAt":[2015,12,8,17,50,31],"updatedBy":null,"executedAt":[2015,12,8,17,50,31],"actualResult":"Application accepts all 10 characters.","outcome":"PASS","new":false}]"""
+        assert response.getBody() == """[{"id":1,"version":0,"updatedAt":[2015,12,8,17,50,31],"updatedBy":null,"executedAt":[2015,12,8,17,50,31],"actualResult":"Application accepts all 10 characters.","outcome":"PASS","new":false},{"id":3,"version":0,"updatedAt":[2015,12,8,17,50,31],"updatedBy":null,"executedAt":null,"actualResult":"Acutal result","outcome":null,"new":false}]"""
     }
 
     def "Should return 200 and respond a new created execution"() {
@@ -74,7 +72,7 @@ class ExecutionFacadeSpec extends AbstractSpec {
         then:
         assert response.getStatusCode() == HttpStatus.OK
         def respondedJson = response.getBody()
-        assert respondedJson.contains('"id":3')
+        assert respondedJson.contains('"id":4')
         assert respondedJson.contains('"actualResult":"test actualResult"')
         assert respondedJson.contains('"outcome":"PASS"')
         assert respondedJson.contains('"executedAt":[2017,12,8,17,50,31]')

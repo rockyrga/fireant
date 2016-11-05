@@ -1,30 +1,34 @@
 package com.rga.fireant.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.rga.fireant.model.Execution;
 import com.rga.fireant.model.TestCase;
 import com.rga.fireant.model.data.ExecutionRepository;
 
 @Service
-public class DeleteExecutionImpl implements DeleteExecution {
+public class ListExecutionImpl implements ListExecution {
 
     private final GetTestCase getTestCase;
     private final ExecutionRepository repository;
 
     @Autowired
-    public DeleteExecutionImpl(GetTestCase getTestCase, ExecutionRepository repository) {
+    public ListExecutionImpl(GetTestCase getTestCase, ExecutionRepository repository) {
 
         this.getTestCase = getTestCase;
         this.repository = repository;
     }
 
     @Override
-    @Transactional(readOnly = false)
-    public void delete(long caseId, long executionId) {
+    @Transactional(readOnly = true)
+    public List<Execution> list(long caseId) {
 
         TestCase testCase = getTestCase.get(caseId);
-        repository.deleteByTestCaseAndId(testCase, executionId);
+        return repository.findAllByTestCase(testCase);
     }
+
 }

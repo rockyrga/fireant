@@ -40,6 +40,15 @@
 			"executed_at": "2015-12-08 17:50:31",
 			"updated_at": "2015-12-08 17:50:31",
 			"version": "0"
+		},
+		{
+			"id": 3,
+			"test_case_id": 1,
+			"actual_result": "Acutal result",
+			"outcome": null,
+			"executed_at": null,
+			"updated_at": "2015-12-08 17:50:31",
+			"version": "0"
 		}
 	]
 }

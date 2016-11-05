@@ -15,10 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.rga.fireant.model.Execution;
-import com.rga.fireant.model.TestCase;
 import com.rga.fireant.service.AddExecution;
 import com.rga.fireant.service.DeleteExecution;
-import com.rga.fireant.service.GetTestCase;
+import com.rga.fireant.service.ListExecution;
 import com.rga.fireant.service.UpdateExecution;
 
 @Component
@@ -30,23 +29,21 @@ public class ExecutionFacade {
     private final AddExecution addExecution;
     private final UpdateExecution updateExecuteion;
     private final DeleteExecution deleteExectuion;
-    private final GetTestCase getTestCase;
+    private final ListExecution listExecution;
 
     @Autowired
     public ExecutionFacade(AddExecution addExecution, UpdateExecution updateExecuteion, DeleteExecution deleteExectuion,
-            GetTestCase getTestCase) {
+            ListExecution listExecution) {
 
         this.addExecution = addExecution;
         this.updateExecuteion = updateExecuteion;
         this.deleteExectuion = deleteExectuion;
-        this.getTestCase = getTestCase;
+        this.listExecution = listExecution;
     }
 
     @GET
     public Response list(@PathParam("case-id") long caseId) {
-
-        TestCase testCase = getTestCase.get(caseId);
-        return Response.ok(testCase.getExecutions()).build();
+        return Response.ok(listExecution.list(caseId)).build();
     }
 
     @POST

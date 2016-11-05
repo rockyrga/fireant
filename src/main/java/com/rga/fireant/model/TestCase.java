@@ -1,13 +1,7 @@
 package com.rga.fireant.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -36,9 +30,10 @@ public class TestCase extends AbstractEntity {
     @Column(length = Application.TEXT_MAX_LENGTH)
     private String prerequisite;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE},
-            mappedBy = "testCase")
-    private List<Execution> executions;
+    // @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE,
+    // CascadeType.MERGE},
+    // mappedBy = "testCase")
+    // private List<Execution> executions;
 
     public String getScenario() {
         return scenario;
@@ -80,22 +75,22 @@ public class TestCase extends AbstractEntity {
         this.prerequisite = prerequisite;
     }
 
-    public List<Execution> getExecutions() {
+    // public List<Execution> getExecutions() {
+    //
+    // if (executions == null) {
+    // return new ArrayList<>();
+    // }
+    //
+    // return executions;
+    // }
 
-        if (executions == null) {
-            return new ArrayList<>();
-        }
+    // public void setExecutions(List<Execution> executions) {
+    // this.executions = executions;
+    // }
 
-        return executions;
-    }
-
-    public void setExecutions(List<Execution> executions) {
-        this.executions = executions;
-    }
-
-    public void addExecution(Execution execution) {
-
-        execution.setTestCase(this);
-        getExecutions().add(execution);
-    }
+    // public void addExecution(Execution execution) {
+    //
+    // execution.setTestCase(this);
+    // getExecutions().add(execution);
+    // }
 }

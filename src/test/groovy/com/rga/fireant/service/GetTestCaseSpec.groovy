@@ -19,9 +19,7 @@ class GetTestCaseSpec extends AbstractSpec {
         this.service = new GetTestCaseImpl(repository)
     }
 
-    @JsonDataSet([
-        "classpath:test-case.json"
-    ])
+    @JsonDataSet(["classpath:test-case.json"])
     def "Should get a test case"() {
 
         when: "Call get method of GetTestCase"

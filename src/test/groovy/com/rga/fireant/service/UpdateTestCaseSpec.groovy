@@ -19,9 +19,7 @@ class UpdateTestCaseSpec extends AbstractSpec {
         this.service = new UpdateTestCaseImpl(repository)
     }
 
-    @JsonDataSet([
-        "classpath:test-case.json"
-    ])
+    @JsonDataSet(["classpath:test-case.json"])
     def "Should update a test case"() {
 
         given: "Retrieve a test case from database"

@@ -25,9 +25,7 @@ import com.rga.fireant.Application
 @WebIntegrationTest(randomPort = true)
 @ContextConfiguration(loader = SpringApplicationContextLoader.class, classes = Application, locations = ["classpath:test-context-persistence.xml"])
 @Stepwise
-@JsonDataSet([
-    "classpath:test-case.json"
-])
+@JsonDataSet(["classpath:test-case.json"])
 class TestCaseFacadeSpec extends AbstractSpec {
 
     @Value('${local.server.port}')
@@ -52,7 +50,7 @@ class TestCaseFacadeSpec extends AbstractSpec {
 
         then:
         assert response.getStatusCode() == HttpStatus.OK
-        assert response.getBody() == """[{"id":1,"version":0,"updatedAt":[2015,12,8,17,50,31],"updatedBy":null,"scenario":"Verify that the input field that can accept maximum of 10 characters","step":"Login to application and key in 10 characters","expectedResult":"Application should be able to accept all 10 characters.","testData":null,"prerequisite":null,"executions":[]},{"id":2,"version":1,"updatedAt":[2015,12,8,17,50,31],"updatedBy":null,"scenario":"Scenario of test case 2","step":"Step of test case 2","expectedResult":"Expected result of test case 2","testData":"Test data of test case 2","prerequisite":"Prerequisite of test case 2","executions":[]}]"""
+        assert response.getBody() == """[{"id":1,"version":0,"updatedAt":[2015,12,8,17,50,31],"updatedBy":null,"scenario":"Verify that the input field that can accept maximum of 10 characters","step":"Login to application and key in 10 characters","expectedResult":"Application should be able to accept all 10 characters.","testData":null,"prerequisite":null},{"id":2,"version":1,"updatedAt":[2015,12,8,17,50,31],"updatedBy":null,"scenario":"Scenario of test case 2","step":"Step of test case 2","expectedResult":"Expected result of test case 2","testData":"Test data of test case 2","prerequisite":"Prerequisite of test case 2"}]"""
     }
 
     def "Should return 200 and respond a test case"() {
@@ -62,7 +60,7 @@ class TestCaseFacadeSpec extends AbstractSpec {
 
         then:
         assert response.getStatusCode() == HttpStatus.OK
-        assert response.getBody() == """{"id":1,"version":0,"updatedAt":[2015,12,8,17,50,31],"updatedBy":null,"scenario":"Verify that the input field that can accept maximum of 10 characters","step":"Login to application and key in 10 characters","expectedResult":"Application should be able to accept all 10 characters.","testData":null,"prerequisite":null,"executions":[]}"""
+        assert response.getBody() == """{"id":1,"version":0,"updatedAt":[2015,12,8,17,50,31],"updatedBy":null,"scenario":"Verify that the input field that can accept maximum of 10 characters","step":"Login to application and key in 10 characters","expectedResult":"Application should be able to accept all 10 characters.","testData":null,"prerequisite":null}"""
     }
 
     def "Should return 200 and respond a new created test case"() {

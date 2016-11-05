@@ -3,7 +3,6 @@ package com.rga.fireant.model;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -25,7 +24,7 @@ public class Execution extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @OneToOne(cascade = CascadeType.REFRESH)
+    @OneToOne
     @JoinColumn(name = "test_case_id")
     @JsonIgnore
     private TestCase testCase;

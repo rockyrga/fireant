@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import com.rc.spoonbill.test.annotation.JsonDataSet
 
 import com.rga.fireant.AbstractSpec
+import com.rga.fireant.model.data.ExecutionRepository
 import com.rga.fireant.model.data.TestCaseRepository
 
 class DeleteTestCaseSpec extends AbstractSpec {
@@ -14,13 +15,14 @@ class DeleteTestCaseSpec extends AbstractSpec {
     @Autowired
     TestCaseRepository repository
 
+    @Autowired
+    ExecutionRepository executionRepository
+
     def setup() {
-        this.service = new DeleteTestCaseImpl(repository)
+        this.service = new DeleteTestCaseImpl(repository, executionRepository)
     }
 
-    @JsonDataSet([
-        "classpath:test-case.json"
-    ])
+    @JsonDataSet(["classpath:test-case.json"])
     def "Should delete a test case"() {
 
         when: "Call delete method of DeleteTestCase"

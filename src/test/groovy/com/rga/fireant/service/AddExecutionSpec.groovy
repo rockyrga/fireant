@@ -52,7 +52,7 @@ class AddExecutionSpec extends AbstractSpec {
         assert result.outcome == execution.getOutcome()
 
         and: "Added to the test case"
-        def dbData = sql.firstRow("select * from executions where test_case_id = ?", 1L)
+        def dbData = sql.firstRow("select * from executions where test_case_id = ? and id =?", 1L, result.id)
         assert dbData != null
         assert dbData.id != null
         assert dbData.updated_at != null
